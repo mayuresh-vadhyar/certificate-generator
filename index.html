@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Certificate</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<h1 style="text-align: center">Certificate Generator</h1>
+
+<form id="certificateForm">
+    <label for="organizationName">Organization Name</label>
+    <input type="text" id="organizationName" name="organizationName" required minlength="3" maxlength="16">
+
+    <label for="title">Title</label>
+    <select id="title" name="title" required>
+        <option value="Mr.">Mr.</option>
+        <option value="Ms.">Ms.</option>
+        <option value="Mrs.">Mrs.</option>
+    </select>
+
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" required minlength="3" maxlength="30">
+
+    <label for="competitionName">Competition Name</label>
+    <input type="text" id="competitionName" name="competitionName" required minlength="3" maxlength="50">
+
+    <label for="eventDate">Event Date</label>
+    <input type="date" id="eventDate" name="eventDate" required>
+
+    <label for="eventName">Event Name</label>
+    <input type="text" id="eventName" name="eventName" required minlength="3" maxlength="30">
+
+    <label for="certificateType">Certificate Type</label>
+    <select id="certificateType" name="certificateType" required>
+        <option value="team">Team</option>
+        <option value="individual">Individual</option>
+    </select>
+
+    <button type="submit">Download Certificate</button>
+</form>
+
+<script>
+    document.getElementById('certificateForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const form = event.target;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        // Convert the event date to ISO string
+        data.eventDate = new Date(data.eventDate).toISOString();
+
+        try {
+            const response = await fetch('{{downloadCertificatePath}}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                const error = await response.error;
+                alert('Error: ' + error.error);
+                return;
+            }
+
+            const result = await response.json();
+            const a = document.createElement('a');
+            a.href = result.url;
+            a.download = '';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Failed to download the certificate.');
+        }
+    });
+</script>
+
+</body>
+</html>

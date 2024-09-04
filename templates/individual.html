@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Certificate of Achievement</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            border: solid black 2px;
+            border-radius: 10px;
+            max-width: 810px;
+            max-height: 570px;
+            margin-bottom: 1px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header img {
+            width: 75px;
+            margin-left: 25px;
+        }
+
+        .header div {
+            font-size: 32px;
+            font-weight: bold;
+            color: #004aad;
+            margin-left: 25px;
+        }
+
+        .logo-img {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+        }
+
+        img {
+            width: 22%;
+        }
+
+        .img1 {
+            height: 45px;
+            width: auto;
+            padding: 0px 0px 0px 0px;
+        }
+
+        .container {
+            text-align: center;
+            padding: 0 50px;
+            zoom: 1;
+        }
+
+        h1,
+        span {
+            color: #3e86cf;
+            margin: 0;
+        }
+
+        .event {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .name {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        p {
+            line-height: 2rem;
+            margin-top: 0px;
+        }
+
+        .footer {
+            margin-left: 300px;
+            margin-top: -18px;
+            margin-bottom: 20px;
+            font-size: 11px;
+        }
+
+        .main {
+            line-height: 300%;
+        }
+
+        .title {
+            padding-top: 15px;
+            margin-bottom: 1px;
+        }
+
+        .sign-div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            bottom: 10px;
+            left: 50px;
+        }
+
+        .fest-cover {
+            float: right;
+            padding: 120px 60px 120px 60px;
+        }
+    </style>
+</head>
+
+<body style="text-align: justify">
+    <img src='{{getAsset}}/fest-cover.jpg' alt='Event Cover' class="fest-cover" width='120px' height='300px'></div>
+    <div class="container" style='padding-top: 25px'>
+        <div class="header">
+            <img src="{{getAsset}}/dummy-university.png" alt="University Logo">
+            <div> {{organizationName}}</div>
+        </div>
+        <div class="main">
+            <div class='title'>
+                <h1>Certificate of Achievement</h1>
+                <p>is awarded to</p>
+            </div>
+            <p> {{title}}
+                <span class="name"> {{name}} </span>
+                <br>for acquiring the highest position at<br>
+                <span class="event">{{competitionName}}</span>
+                <br> held on {{eventDate}} at <br>
+                <span class='event'>{{eventName}}</span>
+            </p>
+        </div>
+        <div class="sign-div">
+            <img class="img1" src='{{getAsset}}/signature.png' alt="Signature" width="10px" height="30px">
+            <span>__________________________</span>
+            <p style="line-height: 1rem">
+                MAYURESH VADHYAR <br />
+                Chairperson, {{eventName}}
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
